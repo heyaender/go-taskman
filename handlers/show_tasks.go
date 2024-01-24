@@ -21,21 +21,28 @@ func ShowTasks(c *fiber.Ctx) error {
 	var tasks []models.Task
 	db.Find(&tasks)
 
+	var tasksResponse []models.TasksResponse
 	for _, task := range tasks {
-		c.JSON(task)
+
+		tasksResponse = append(tasksResponse, models.TasksResponse{
+			ID:          task.ID,
+			Title:       task.Title,
+			Description: task.Description,
+			Status:      task.Status,
+			Deadline:    task.Deadline,
+		})
 	}
 
-	if len(tasks) == 0 {
-		return c.Status(fiber.StatusOK).JSON(fiber.Map{
-			"status":  "success",
-			"message": "You don't have any tasks!",
-			"data":    tasks,
+	if tasksResponse == nil {
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
+			"status":  fiber.StatusInternalServerError,
+			"message": "Cannot find any tasks!",
 		})
 	}
 
 	return c.Status(fiber.StatusOK).JSON(fiber.Map{
 		"status":  "success",
 		"message": "This is all your tasks!",
-		"data":    tasks,
+		"data":    tasksResponse,
 	})
 }
