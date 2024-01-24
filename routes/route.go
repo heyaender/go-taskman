@@ -35,5 +35,6 @@ func SetupRoutes(app *fiber.App) {
 	v1.Patch("/task/:id", handlers.UpdateTask)
 	v1.Delete("/task/:id", handlers.DeleteTask)
 	v1.Get("/trash", handlers.CheckTrash)
+	v1.Get("/tasks/today", handlers.ShowTasksToday)
 
 }

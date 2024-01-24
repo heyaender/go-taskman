@@ -11,7 +11,7 @@ type Task struct {
 	ID          uint64             `gorm:"primaryKey;autoIncrement;not null"`
 	Title       string             `gorm:"size:255;not null"`
 	Description string             `gorm:"size:255;not null"`
-	Status      string             `gorm:"size:50;not null;default:'pending'"`
+	Status      string             `gorm:"size:50;not null;default:'uncompleted'"`
 	Deadline    *configs.LocalTime `gorm:"type:datetime"`
 }
 
