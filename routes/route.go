@@ -22,11 +22,15 @@ func SetupRoutes(app *fiber.App) {
 	app.Get("/env", func(c *fiber.Ctx) error {
 		return c.SendString("Environment: " + os.Getenv("TEST_ENV"))
 	})
+	app.Get("/db", func(c *fiber.Ctx) error {
+		return c.SendString("DB: " + os.Getenv("DB_NAME"))
+	})
 
 	// ----- Versioning -----
 	v1 := api.Group("/v1")
 
 	// ----- API Routes -----
-	v1.Post("/tasks/create", handlers.CreateTask)
+	v1.Get("/tasks", handlers.ShowTasks)
+	v1.Post("/task/create", handlers.CreateTask)
 
 }
