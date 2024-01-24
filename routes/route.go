@@ -32,5 +32,8 @@ func SetupRoutes(app *fiber.App) {
 	// ----- API Routes -----
 	v1.Get("/tasks", handlers.ShowTasks)
 	v1.Post("/task/create", handlers.CreateTask)
+	v1.Patch("/task/:id", handlers.UpdateTask)
+	v1.Delete("/task/:id", handlers.DeleteTask)
+	v1.Get("/trash", handlers.CheckTrash)
 
 }

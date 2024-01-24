@@ -29,3 +29,7 @@ type CreateTaskRequest struct {
 	Status      string             `json:"status"`
 	Deadline    *configs.LocalTime `json:"deadline"`
 }
+
+type MarkTaskCompleteRequest struct {
+	Status string `json:"status"`
+}
